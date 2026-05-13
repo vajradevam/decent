@@ -7,7 +7,7 @@ let messageStore = {}
 const $ = id => document.getElementById(id)
 
 window.onload = async () => {
-  gun = Gun(['http://localhost:8765/gun'])
+  gun = Gun([location.origin + '/gun'])
 
   const stored = localStorage.getItem('decent-chat-pair')
   if (stored) {
