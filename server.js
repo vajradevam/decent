@@ -12,8 +12,7 @@ const MIME = {
 }
 
 const server = http.createServer((req, res) => {
-  const url = req.url === '/' ? '/index.html' : req.url
-  const ext = path.extname(url)
+  let url = req.url === '/' ? '/index.html' : req.url
 
   if (url.startsWith('/gun/')) {
     const gunPath = path.join(__dirname, 'node_modules', url)
@@ -21,10 +20,13 @@ const server = http.createServer((req, res) => {
       res.writeHead(200, { 'Content-Type': 'application/javascript' })
       return res.end(fs.readFileSync(gunPath))
     }
+    res.writeHead(404)
+    return res.end('Not found')
   }
 
   const filePath = path.join(__dirname, url)
-  if (fs.existsSync(filePath) && ext) {
+  if (fs.existsSync(filePath)) {
+    const ext = path.extname(filePath)
     res.writeHead(200, { 'Content-Type': MIME[ext] || 'application/octet-stream' })
     return res.end(fs.readFileSync(filePath))
   }
@@ -35,6 +37,7 @@ const server = http.createServer((req, res) => {
 
 const gun = Gun({ web: server })
 
-server.listen(PORT, () => {
-  console.log(`DecentChat running on http://localhost:${PORT}`)
+server.listen(PORT, '0.0.0.0', () => {
+  console.log(`DecentChat running on port ${PORT}`)
+  console.log(`Files: ${fs.readdirSync(__dirname).join(', ')}`)
 })
