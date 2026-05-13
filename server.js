@@ -14,6 +14,15 @@ const MIME = {
 const server = http.createServer((req, res) => {
   let url = req.url === '/' ? '/index.html' : req.url
 
+  if (url === '/debug') {
+    const files = fs.readdirSync(__dirname).join(', ')
+    const pkg = fs.existsSync(path.join(__dirname, 'package.json'))
+      ? fs.readFileSync(path.join(__dirname, 'package.json'), 'utf8').slice(0, 200)
+      : 'no package.json'
+    res.writeHead(200, { 'Content-Type': 'text/plain' })
+    return res.end(`__dirname: ${__dirname}\ncwd: ${process.cwd()}\nfiles: ${files}\npackage: ${pkg}`)
+  }
+
   if (url.startsWith('/gun/')) {
     const gunPath = path.join(__dirname, 'node_modules', url)
     if (fs.existsSync(gunPath)) {
