@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DecentChat</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div id="app">
+    <div id="login-screen">
+      <div class="login-box">
+        <div class="logo">&#x1f4ac; DecentChat</div>
+        <div class="subtitle">Decentralized &bull; E2E Encrypted</div>
+        <input id="username" type="text" placeholder="Username" autocomplete="off">
+        <div class="btn-row">
+          <button id="register-btn" class="btn primary">Register</button>
+          <button id="login-btn" class="btn">Login</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="chat-screen" class="hidden">
+      <aside id="sidebar">
+        <div id="sidebar-header">
+          <span id="user-display"></span>
+          <button id="logout-btn" title="Logout">&times;</button>
+        </div>
+        <div id="contacts-list"></div>
+        <div id="sidebar-footer">
+          <button id="add-contact-btn" class="btn small">+ Add Contact</button>
+        </div>
+      </aside>
+
+      <main id="chat-area">
+        <div id="chat-header"></div>
+        <div id="chat-messages"></div>
+        <div id="chat-input-area" class="hidden">
+          <input id="message-input" type="text" placeholder="Type a message..." autocomplete="off">
+          <button id="send-btn" class="btn primary">Send</button>
+        </div>
+      </main>
+    </div>
+
+    <div id="add-contact-modal" class="modal hidden">
+      <div class="modal-content">
+        <span id="close-modal" class="close">&times;</span>
+        <h3>Add Contact</h3>
+        <input id="contact-username-lookup" type="text" placeholder="Lookup by username" autocomplete="off">
+        <button id="lookup-btn" class="btn small">Lookup</button>
+        <div id="lookup-result"></div>
+        <hr>
+        <input id="contact-pub-input" type="text" placeholder="Or enter public key directly" autocomplete="off">
+        <input id="contact-alias-input" type="text" placeholder="Display name (optional)" autocomplete="off">
+        <button id="confirm-add-contact" class="btn primary">Add</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/gun/gun.js"></script>
+  <script src="/gun/sea.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

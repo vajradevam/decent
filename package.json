@@ -1,0 +1,12 @@
+{
+  "name": "decent-chat",
+  "version": "1.0.0",
+  "description": "Decentralized E2E encrypted chat with Gun.js",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "gun": "^0.9.99"
+  }
+}
